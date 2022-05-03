@@ -12,7 +12,8 @@ style={{
       width: 80%;
       margin: auto;
       border: 1px solid black;
-      height: 250px;
+      height: 300px;
+      padding-bottom: 4vh;
   }
   
 
