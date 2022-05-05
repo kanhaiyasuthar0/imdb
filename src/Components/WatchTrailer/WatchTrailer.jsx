@@ -59,10 +59,6 @@ function WatchTrailer() {
               <AboutCard/>
             </div>
         </Container>
-        <h3 style={{ color: "white", paddingLeft: "4vh", marginBottom: "3vh" }}>
-        Featured Videos
-      </h3>
-        <RelatedVideoSlider  api_url={`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=10749`} base_url={base_url}/>
 
         <h3 style={{ color: "white", paddingLeft: "4vh", marginBottom: "3vh",marginTop:"3vh" }}>
         Related Videos

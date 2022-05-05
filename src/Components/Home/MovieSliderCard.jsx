@@ -1,27 +1,27 @@
-import React, { useContext } from "react";
-import {useDispatch,useSelector} from 'react-redux';
+import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import AddIcon from '@material-ui/icons/Add';
-import './MovieSliderCard.css';
-import DoneIcon from '@material-ui/icons/Done';
+import AddIcon from "@material-ui/icons/Add";
+import "./MovieSliderCard.css";
+import DoneIcon from "@material-ui/icons/Done";
 import { updateWatchList } from "../../Redux/Laxmi/action";
 import { AuthContext } from "../../Context/AuthContext";
-import {handleAdd} from '../../Redux/Laxmi/action'
-
+import { handleAdd } from "../../Redux/Laxmi/action";
+import style from '../Home/MovieSliderCard.module.css'
 const Box = styled.div`
-  width: 180px;
-  height: 450px;
+  width: 199px;
+  height: 500px;
   // border: 1px solid yellow;
 `;
 
 const PictureDiv = styled.div`
   height: 60%;
   width: 100%;
-  position:relative;
+  position: relative;
 `;
 const TitleDiv = styled.div`
   height: 40%;
@@ -33,7 +33,6 @@ const ImgTag = styled.img`
   width: 100%;
   height: 100%;
 `;
-
 
 const Rate = styled.div`
   width: 80%;
@@ -50,6 +49,8 @@ const Title = styled.div`
   padding-top: 1vh;
   padding-bottom: 1vh;
   // border:1px solid white;
+  text-align: center;
+  margin:auto;
   & > p:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -80,57 +81,76 @@ const TrailerButton = styled.button`
   border: 0px;
   padding: 4px;
   margin-top: 5px;
-  border-radius:5px;
+  border-radius: 5px;
 
   &:hover {
     background: #2c2c2c;
   }
 `;
 
-
-function MovieSliderCard({ name, poster, rate,dispatch ,item}) {
+function MovieSliderCard({ name, poster, rate, dispatch, item }) {
   // const store = useSelector((store)=>store.watchList.watchList);
-  const {vId , WatchTrailerData, setWatchTrailerData, handleSearch,base_url, popup, setPopup} = useContext(AuthContext);
-
-   
-  const handleAdd1=(item)=>{
-   dispatch(handleAdd(item))
     
+  const{rateFlag,setRateFlag} = useContext(AuthContext)
+  
+    const {
+    vId,
+    WatchTrailerData,
+    setWatchTrailerData,
+    handleSearch,
+    base_url,
+    popup,
+    setPopup,
+  } = useContext(AuthContext);
+
+  const handleAdd1 = (item) => {
+    dispatch(handleAdd(item));
+  };
+
+  function rateBtnFun(){
+    setRateFlag(!rateFlag)
+    console.log('rate btn clicked',rateFlag);
   }
+
 
   return (
     <Box>
       <PictureDiv>
         <ImgTag src={`${base_url}${poster}`} />
         <div className="AddToWatchList">
-        <AddIcon onClick={()=>handleAdd1(item)}/>
+          <AddIcon onClick={() => handleAdd1(item)} />
         </div>
       </PictureDiv>
 
       {/* title div */}
-      <TitleDiv onClick={()=>handleSearch(name)}>
-
-        <Rate>
-          
-          <p> <StarIcon style={{ color: "#f5c516",fontSize:"17px" }} /> {rate}</p>
-          &nbsp;&nbsp;  &nbsp;&nbsp;
-          <StarBorderOutlinedIcon style={{ color: "#5594e5" ,fontSize:"17px"}} />
+      <TitleDiv>
+        <Rate >
+          <p>
+            {" "}
+            <StarIcon style={{ color: "#f5c516", fontSize: "17px" }} /> {rate}
+          </p>
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          <div className={style.rateBox}>
+          <StarBorderOutlinedIcon
+            style={{ color: "#5594e5", fontSize: "17px" }}
+            onClick={rateBtnFun}
+          />
+          </div>
         </Rate>
 
         <Title>
-          <p>{name}</p>
+          <p  onClick={() => handleSearch(name)} >{name}</p>
         </Title>
 
         <WatchNowButton>Watch now</WatchNowButton>
 
         <TrailerDiv>
-          <TrailerButton>
+          <TrailerButton  onClick={() => handleSearch(name)}>
             <PlayArrowIcon /> Trailer
           </TrailerButton>
           &nbsp;&nbsp;
           <InfoOutlinedIcon />
         </TrailerDiv>
-
       </TitleDiv>
     </Box>
   );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import '../Home/UpNextCardBoxes.css';
+// import '../Home/UpNextCardBoxes.css';
 import { AuthContext } from "../../Context/AuthContext";
 
 const ImageDiv = styled.div`
@@ -86,8 +86,12 @@ function RelatedVideoSlider({api_url}) {
             return (
               <div 
                key={item.id}
-               onClick={()=>handleSearch(item.title )}
+
+             
+
+//                onClick={()=>handleSearch(item.title )}
               //  onClick={()=>console.log(item.title)}
+
               style={{
                 height: "500px",
                 margin: "auto",
@@ -102,6 +106,7 @@ function RelatedVideoSlider({api_url}) {
                   height={"100%"}
                   width={"100%"}
                   style={{ margin: "0px", padding: "0" }}
+                  onClick={()=>handleSearch(item.title?item.title : item.name)}
                 />
                 <PlayCircleOutlineIcon className="PlayButton" style={{
                     color: "white",

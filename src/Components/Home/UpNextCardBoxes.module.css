@@ -1,0 +1,48 @@
+.container{
+   width:90%;
+   height:150px;
+   display:flex;
+   color:white;
+   padding:1vh;
+   margin:2vh;
+   background-color:#111111;
+}
+.container>div{
+}
+.imageBox{
+    width:30%;
+}
+.imageBox img{
+    width:90%;
+    height:90%;
+    place-items:center;
+}
+.detailsBox{
+    width:70%;
+    
+}
+.playBtn{
+    margin-left:1vh;
+    margin-right:1vh;
+}
+.playBtn:hover{
+    color:#f5c516;
+}
+.icons{
+    width:100%;
+    height:25%;
+    display:flex;
+    margin-top:1vh;
+}
+.timing{
+    margin-top:1.5vh;
+    color:#cecece;
+}
+.titles{
+    width:100%;
+    height:30%;
+    margin-top:1.5vh;
+    /* margin-left:1vh; */
+    display:flex;
+    /* border:1px solid white; */
+}
