@@ -1,13 +1,37 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import MovieSliderCard from "./MovieSliderCard";
+import styled from 'styled-components';
+import style from './Responsive.module.css'
+import { AuthContext } from "../../Context/AuthContext";
+import StarIcon from '@material-ui/icons/Star';
+
+const Rate = styled.div`
+width:600px;
+height:300px;
+margin:auto;
+background:#1f1f1f;
+border-radius:3vh;
+position:absolute;
+left:30%;
+z-index:${props => props.rateFlag ? '1' : '-11'}
+`
+// z-index:-1;
+// z-index: ${{rateFlag} ? '1' : '0'};
 
 function Responsive ({api_url}){
 
   const dispatch = useDispatch();
+  const{rateFlag,setRateFlag} = useContext(AuthContext)
+  console.log('rate btn clicked from parent page',rateFlag);
+  useEffect(()=>{
+  },[])
 
-
+   const handleRateBox=()=>{
+    // setRateFlag(!rateFlag);
+    // console.log(rateFlag,'from responsive')
+   }
  
     var settings = {
       dots: true,
@@ -55,8 +79,14 @@ function Responsive ({api_url}){
 
 
     return (
-      <div>
-       
+      <div className={style.container}>
+       <Rate rateFlag>
+         <button style={{backgroundColor:"transparent", fontSize:"5vh", color:"white", border:"0px", position:"absolute",right:"2px", top:"-45px"}} onClick={handleRateBox}>X</button>
+       <StarIcon style={{fontSize:"26vh",position:"absolute" , top:"-60", zIndex:"2", left:"35%",  color: "#5594e5"}}/>
+       <h6 style={{color:"yellow",marginTop:"16vh", textAlign:"center", }}>RATE THIS</h6>
+        
+        <button style={{marginTop:"16vh", marginLeft:"24vh",height:"40px", width:"300px", backgroundColor:"#575757", border:"0px", borderRadius:"1vh", color:"white"}}>Rate</button>
+       </Rate>
         <Slider {...settings}>
            {
            

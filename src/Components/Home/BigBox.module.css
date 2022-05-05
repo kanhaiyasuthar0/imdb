@@ -4,17 +4,19 @@
     height:100%;
     position:relative;
     overflow: hidden;
-
+    transition: transform 250ms ease-in;
 }
 .sliderImage{
     height:100%;
     width:100%;
     background: rgb(183, 225, 218);
     display:flex;
+    /* transition: transform 250ms ease-in; */
 }
 .sliderImage img{
     width: 100%;
     height:100%;
+    /* transition: transform 250ms ease-in; */
 }
 .playBtn:hover{
     color:#f5c516;
@@ -25,11 +27,14 @@
     background:rgba(0, 0, 0, 0.607);
     border: 0px;
     width:7vh;
-    height:9vh;
+    height:10vh;
     border-radius: 5px;
     color:white;
-    font-size: 3vh;
+    font-size: 4vh;
     border:1px solid white;
+}
+.btn:hover{
+    color:#f5c516
 }
 .prev{
     left:0;
@@ -38,26 +43,48 @@
     right:0;
 }
 .subTitleDiv{
-    width:90%;
+    width:100%;
+    height:130px;
+    position:absolute;
+    /* left:3vh; */
+    bottom:0;
+    display:flex;
+    /* flex-wrap:nowrap; */
+    color:white;
+    /* border:1px solid white; */
+    background:rgba(0, 0, 0, 0.824);
+    box-shadow: 0px -76px 100px black;
+}
+.subTitleImage{
+    width:170px;
     height:250px;
     position:absolute;
     left:3vh;
     bottom:10px;
-    display:flex;
-    flex-wrap:nowrap;
-    color:white;
-    /* background:rgba(6, 6, 6, 0.826); */
-}
-.subTitleImage{
-    width:20%;
-    height:100%;
+    z-index: 1;
 }
 .subTitleText{
-    margin-top: 22vh;
-    margin-left:10px;
-    font-size: 4vh;
+    margin-top: 2vh;
+    /* margin-bottom: 40vh; */
+    margin-left:1vh;
+    font-size: 5vh;
 }
 .UpNextTitle{
     margin-left:2vh;
     color:#f5c516;
+}
+.browserTrailer{
+    margin-left:2vh;
+}
+.browserTrailer:hover{
+    color:#f5c516;
+}
+.upnextDiv{}
+@media screen and (max-width:850px){
+    .upnextDiv{
+        display:none;
+    }
+    .Slider{
+        width:100%;
+    }
 }

@@ -1,0 +1,10 @@
+.rateBox{
+   width:40px;
+   height:30px;
+   border-radius: 2px;
+   /* background: yellow; */
+}
+.rateBox:hover{
+    background: #2c2c2c;
+    cursor: pointer;
+}

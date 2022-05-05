@@ -20,7 +20,7 @@ const Container = styled.div`
 //   height:100%;
 // `
 const UpNext = styled.div`
-  background-color:black;
+  // background-color:black;
   width:33%;
   height:500px;
 `;
@@ -110,21 +110,21 @@ function next(){
                <div className={style.sliderImage}>
                    <img src={images[index].MainImageurl} alt="" />
                </div>
-               <div className={style.subTitleDiv}>
                  <img src={images[index].subTitleImg} alt="" className={style.subTitleImage}/>
-                 <PlayCircleOutlineIcon className={style.playBtn} style={{ fontSize: "12vh", marginTop:"20vh", marginLeft:"3vh" }}/>
+               <div className={style.subTitleDiv}>
+                 <PlayCircleOutlineIcon className={style.playBtn} style={{ fontSize: "12vh", marginTop:"2vh", marginLeft:"30vh" }}/>
                  <p className={style.subTitleText}>{images[index].SubTitleText}</p>
                </div>
-               <button onClick={previous} className={`${style.btn} ${style.prev}`}> <ArrowBackIosNewIcon/>  </button>
-               <button onClick={next} className={`${style.btn} ${style.next}`}> <ArrowForwardIosIcon/></button>
+               <button onClick={previous} className={`${style.btn} ${style.prev}`}> <ArrowBackIosNewIcon style={{ fontSize: "6vh"}} />  </button>
+               <button onClick={next} className={`${style.btn} ${style.next}`}> <ArrowForwardIosIcon style={{ fontSize: "6vh"}} /></button>
         </div>
 
-        <UpNext>
-          <h4 className={style.UpNextTitle}>Up next</h4>
+        <UpNext className={style.upnextDiv}>
+          <h5 className={style.UpNextTitle}>Up next</h5>
           <UpNextBox img_url={allArrays[index][0].image_url} title={allArrays[index][0].title} time={allArrays[index][0].time} discription='A woman discovers she has a new relationship with time, after surviving a car accident that almost killed her.'/>
           <UpNextBox img_url={allArrays[index][1].image_url} title={allArrays[index][1].title} time={allArrays[index][1].time} discription='A woman discovers she has a new relationship with time, after surviving a car accident that almost killed her.'/>
           <UpNextBox img_url={allArrays[index][2].image_url} title={allArrays[index][2].title} time={allArrays[index][2].time} discription='A woman discovers she has a new relationship with time, after surviving a car accident that almost killed her.'/>
-          <h4 className={style.UpNextTitle}>Browse Trailer</h4>
+          <h4 className={style.browserTrailer}>Browse Trailer</h4>
         </UpNext>
 
     </Container>

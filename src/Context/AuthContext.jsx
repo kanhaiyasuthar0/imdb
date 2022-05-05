@@ -17,7 +17,8 @@ export function AuthContextProvider({ children }) {
     const [popup, setPopup] = useState(false)
    
     
-    const [WatchTrailerData, setWatchTrailerData] = useState({})
+    const [WatchTrailerData, setWatchTrailerData] = useState({});
+    const [rateFlag, setRateFlag] = useState(false);
     
     const naviagte = useNavigate()
 
@@ -57,7 +58,7 @@ export function AuthContextProvider({ children }) {
     
 
   return (
-    <AuthContext.Provider value={{setVId,vId,setProgress,progress,setWatchTrailerData,WatchTrailerData, login, isAuth , token ,logout, handleColor, color, handleSearch, popup, setPopup,base_url, setisEnglish, isEnglish, setIsChecked,isChecked}}>
+    <AuthContext.Provider value={{setVId,vId,setProgress,progress,setWatchTrailerData,WatchTrailerData, login, isAuth , token ,logout, handleColor, color, handleSearch, popup, setPopup,base_url, setisEnglish, isEnglish, setIsChecked,isChecked,rateFlag,setRateFlag}}>
       {children}
     </AuthContext.Provider>
   );
