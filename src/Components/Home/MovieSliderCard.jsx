@@ -11,7 +11,25 @@ import DoneIcon from "@material-ui/icons/Done";
 import { updateWatchList } from "../../Redux/Laxmi/action";
 import { AuthContext } from "../../Context/AuthContext";
 import { handleAdd } from "../../Redux/Laxmi/action";
-import style from '../Home/MovieSliderCard.module.css'
+import style from "../Home/MovieSliderCard.module.css";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Paper from "@mui/material/Paper";
+import Draggable from "react-draggable";
+
+
+
+
+import Rating from '@mui/material/Rating';
+
+
+
+
 const Box = styled.div`
   width: 199px;
   height: 500px;
@@ -50,7 +68,7 @@ const Title = styled.div`
   padding-bottom: 1vh;
   // border:1px solid white;
   text-align: center;
-  margin:auto;
+  margin: auto;
   & > p:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -88,12 +106,44 @@ const TrailerButton = styled.button`
   }
 `;
 
+const RatePopUp = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background: #1f1f1f;
+  border-radius: 3vh;
+  z-index: 1;
+`;
+// z-index:${props => props.rateFlag ? '1' : '-11'}
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
 function MovieSliderCard({ name, poster, rate, dispatch, item }) {
   // const store = useSelector((store)=>store.watchList.watchList);
-    
-  const{rateFlag,setRateFlag} = useContext(AuthContext)
-  
-    const {
+
+  const [open, setOpen] = React.useState(false);
+
+  const [value, setValue] = useState(0);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const { rateFlag, setRateFlag } = useContext(AuthContext);
+  const {
     vId,
     WatchTrailerData,
     setWatchTrailerData,
@@ -107,11 +157,13 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
     dispatch(handleAdd(item));
   };
 
-  function rateBtnFun(){
-    setRateFlag(!rateFlag)
-    console.log('rate btn clicked',rateFlag);
+  function takeRateValue(){
+    console.log(value)
   }
-
+  // function rateBtnFun() {
+  //   setRateFlag(!rateFlag);
+  //   console.log("rate btn clicked", rateFlag);
+  // }
 
   return (
     <Box>
@@ -124,28 +176,119 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
 
       {/* title div */}
       <TitleDiv>
-        <Rate >
+        <Rate>
           <p>
             {" "}
             <StarIcon style={{ color: "#f5c516", fontSize: "17px" }} /> {rate}
           </p>
           &nbsp;&nbsp; &nbsp;&nbsp;
           <div className={style.rateBox}>
-          <StarBorderOutlinedIcon
+            {/* <StarBorderOutlinedIcon
             style={{ color: "#5594e5", fontSize: "17px" }}
             onClick={rateBtnFun}
-          />
+          /> */}
+
+            <div>
+              <Button
+                variant="outlined"
+                onClick={handleClickOpen}
+                style={{ border: "none" }}
+              >
+                <StarBorderOutlinedIcon
+                  style={{ color: "#5594e5", fontSize: "17px" }}
+                />
+              </Button>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                PaperComponent={PaperComponent}
+                aria-labelledby="draggable-dialog-title"
+                style={{ border: "2px solid red"}}
+              >
+                {/* <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Subscribe
+        </DialogTitle> */}
+                <DialogContent style={{background:"#1f1f1f", width:"600px", height:"400px", textAlign:"center"}}>
+                  
+                <RatePopUp>
+                      {/* <button
+                        style={{
+                          backgroundColor: "transparent",
+                          fontSize: "5vh",
+                          color: "white",
+                          border: "0px",
+                        }}
+                      >
+                        X
+                      </button> */}
+
+                      <StarIcon
+                        style={{
+                          fontSize: "26vh",
+                          zIndex: "2",
+                          color: "#5594e5",
+                        }}
+                      />
+                      <h6
+                        style={{
+                          color: "yellow",
+                          marginTop: "2vh",
+                          textAlign: "center",
+                        }}
+                      >
+                        RATE THIS
+                      </h6>
+                        {/* <Rating name="full-rating" defaultValue={0} precision={1} style={{color:"#5594e5",}}/> */}
+                        <Rating name="customized-10"     getLabelText={(value) => console.log(value,'rateValue')} defaultValue={2} max={10} style={{color:"#5594e5"}}/>
+                        <br />
+                      <button
+                        style={{
+                          marginTop: "1vh",
+                          marginLeft: "4vh",
+                          height: "40px",
+                          width: "300px",
+                          backgroundColor: "#575757",
+                          border: "0px",
+                          borderRadius: "1vh",
+                          color: "white",
+                        }}
+                        onClick={handleClose}
+                      >
+                        Rate
+                      </button>
+                    </RatePopUp>
+{/*                     
+                  <DialogContentText>
+                  </DialogContentText>
+                  <DialogActions>
+                    <Button autoFocus onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button onClick={handleClose}>Subscribe</Button>
+                  </DialogActions> */}
+                </DialogContent>
+
+                {/* 
+        <RatePopUp>
+         <button style={{backgroundColor:"transparent", fontSize:"5vh", color:"white", border:"0px", position:"absolute",right:"2px", top:"-45px"}}>X</button>
+       <StarIcon style={{fontSize:"26vh",position:"absolute" , top:"-60", zIndex:"2", left:"35%",  color: "#5594e5"}}/>
+       <h6 style={{color:"yellow",marginTop:"16vh", textAlign:"center", }}>RATE THIS</h6>
+        
+        <button style={{marginTop:"16vh", marginLeft:"24vh",height:"40px", width:"300px", backgroundColor:"#575757", border:"0px", borderRadius:"1vh", color:"white"}}>Rate</button>
+       </RatePopUp> */}
+              </Dialog>
+            </div>
           </div>
         </Rate>
 
         <Title>
-          <p  onClick={() => handleSearch(name)} >{name}</p>
+          <p onClick={() => handleSearch(name)}>{name}</p>
         </Title>
 
         <WatchNowButton>Watch now</WatchNowButton>
 
         <TrailerDiv>
-          <TrailerButton  onClick={() => handleSearch(name)}>
+          <TrailerButton onClick={() => handleSearch(name)}>
             <PlayArrowIcon /> Trailer
           </TrailerButton>
           &nbsp;&nbsp;
