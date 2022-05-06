@@ -192,10 +192,10 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
               <Button
                 variant="outlined"
                 onClick={handleClickOpen}
-                style={{ border: "none" }}
+                style={{ border: "none",width:"4px"}}
               >
                 <StarBorderOutlinedIcon
-                  style={{ color: "#5594e5", fontSize: "17px" }}
+                  style={{ color: "#5594e5", fontSize: "17px" , width:"100%"}}
                 />
               </Button>
               <Dialog
@@ -203,24 +203,12 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
-                style={{ border: "2px solid red"}}
               >
-                {/* <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          Subscribe
-        </DialogTitle> */}
+                
                 <DialogContent style={{background:"#1f1f1f", width:"600px", height:"400px", textAlign:"center"}}>
                   
                 <RatePopUp>
-                      {/* <button
-                        style={{
-                          backgroundColor: "transparent",
-                          fontSize: "5vh",
-                          color: "white",
-                          border: "0px",
-                        }}
-                      >
-                        X
-                      </button> */}
+                     
 
                       <StarIcon
                         style={{
@@ -238,8 +226,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
                       >
                         RATE THIS
                       </h6>
-                        {/* <Rating name="full-rating" defaultValue={0} precision={1} style={{color:"#5594e5",}}/> */}
-                        <Rating name="customized-10"     getLabelText={(value) => console.log(value,'rateValue')} defaultValue={2} max={10} style={{color:"#5594e5"}}/>
+                        <Rating name="customized-10"     getLabelText={(value) => console.log(value,'rateValue')} defaultValue={0} max={10} style={{color:"#5594e5"}}/>
                         <br />
                       <button
                         style={{

@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   display: flex;
 `;
 const Box = styled.div`
-  width: 180px;
+  width: 199px;
   height: 450px;
   // border: 1px solid yellow;
   margin:4vh
@@ -35,6 +35,7 @@ const TitleDiv = styled.div`
   width: 100%;
   background: #1a1a1a;
   text-align: center;
+  color:white;
 `;
 const ImgTag = styled.img`
   width: 100%;
@@ -48,6 +49,7 @@ const Rate = styled.div`
   display: flex;
   // border:1px solid yellow;
   padding: 7px;
+  color:white;
   // text-align:center;
   // justify-content: space-around;
 `;
@@ -128,11 +130,11 @@ function WatchList() {
                   <StarIcon
                     style={{ color: "#f5c516", fontSize: "17px" }}
                   />{" "}
-                  {item.rate}
+                  <span style={{color:"white"}}>{item.rate}</span>
                 </p>
                 &nbsp;&nbsp; &nbsp;&nbsp;
                 <StarBorderOutlinedIcon
-                  style={{ color: "#5594e5", fontSize: "17px" }}
+                  style={{ color: "#5594e5", fontSize: "19px" }}
                 />
               </Rate>
 
