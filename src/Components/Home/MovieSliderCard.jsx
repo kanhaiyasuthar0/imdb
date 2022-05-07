@@ -132,7 +132,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
 
   const [open, setOpen] = React.useState(false);
 
-  const [value, setValue] = useState(0);
+  const [ratevalue, setRateValue] = useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -157,9 +157,6 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
     dispatch(handleAdd(item));
   };
 
-  function takeRateValue(){
-    console.log(value)
-  }
   // function rateBtnFun() {
   //   setRateFlag(!rateFlag);
   //   console.log("rate btn clicked", rateFlag);
@@ -197,6 +194,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
                 <StarBorderOutlinedIcon
                   style={{ color: "#5594e5", fontSize: "17px" , width:"100%"}}
                 />
+                <span style={{color:"white"}}ratevalue>{ratevalue=== 0 ? '' : ratevalue}</span>
               </Button>
               <Dialog
                 open={open}
@@ -226,7 +224,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
                       >
                         RATE THIS
                       </h6>
-                        <Rating name="customized-10"     getLabelText={(value) => console.log(value,'rateValue')} defaultValue={0} max={10} style={{color:"#5594e5"}}/>
+                        <Rating name="customized-10"     getLabelText={(value) => setRateValue(value)} defaultValue={0} max={10} style={{color:"#5594e5"}}/>
                         <br />
                       <button
                         style={{
