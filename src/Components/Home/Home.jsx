@@ -17,7 +17,7 @@ import WatchList from "./WatchList";
 import { addUser, islogin } from "../../Redux/Kanhaiya/action";
 import { AuthContext } from "../../Context/AuthContext";
 import BigBox from "./BigBox";
-import RelatedVideoSlider from "../WatchTrailer/RelatedVideoSlider";
+// import RelatedVideoSlider from "../WatchTrailer/RelatedVideoSlider";
 
 
 const Container = styled.div`
@@ -73,12 +73,15 @@ function Home() {
       dispatch(islogin(true));
       return;
     }
-    if(!isLogin){
+    
+    // if(!isLogin){
       
 
-      navigate("/signi")
-    }
+    //   navigate("/signi")
+    // }
   }, [])
+
+
 
 
   const API_KEY = 'cd1b752287267fcdd91d7693d2fb5336';
