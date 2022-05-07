@@ -14,6 +14,7 @@ import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
 import WatchTrailer from './Components/WatchTrailer/WatchTrailer';
 import UserDropdown from './Components/UserDropdown';
+import Success from './Components/successWindow/Success';
 
 function App() {
   const {vId , setVId, progress, setProgress} = useContext(AuthContext);
@@ -36,6 +37,7 @@ function App() {
         <Route path='/signin' element={<SignIn/>}></Route> 
         <Route path='/signi' element={<SignInPage/>}></Route> 
         <Route path='/registeri' element={<RegisterPage/>}></Route> 
+        <Route path='/login/success'  element={<Success/>}></Route> 
         
         {/* <Route></Route>
         <Route></Route>

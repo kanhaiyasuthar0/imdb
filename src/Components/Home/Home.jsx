@@ -73,11 +73,11 @@ function Home() {
       dispatch(islogin(true));
       return;
     }
-    if(!isLogin){
+    // if(!isLogin){
       
 
-      navigate("/signi")
-    }
+    //   navigate("/signi")
+    // }
   }, [])
 
 

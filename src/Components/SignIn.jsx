@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -10,14 +10,38 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthContext } from "../Context/AuthContext";
 import UserDropdown from "./UserDropdown";
-const SignIn = () => {
-    const {vId , setVId, setProgress} = useContext(AuthContext);
+import axios from "axios";
 
+const SignIn = () => {
+    const {vId , setVId, setProgress, isSuccess} = useContext(AuthContext);
     const navigate = useNavigate();
+    useEffect(()=>{
+      console.log("timer is going on");
+     let timer =  setInterval(() => {
+        if(isSuccess){
+         clearInterval(timer)
+          navigate("/")
+        }
+      }, 500);
+    }, [isSuccess])
    const handleSign = ()=>{
     setProgress(10)
     navigate("/signi")
     setProgress(100)
+   }
+   const handlegoogle = async ()=>{
+    //  let timer: NodeJS.Timeout | null = null;
+
+    const url = "https://imdbbackend.herokuapp.com/google";
+
+    const newWindow = window.open(url, "_blank", "width=600, height=700")
+    console.log("first")
+    let payload = {
+      email: "kanhaiyasuthar0@gmail.com",
+      password : "403"
+    }
+    localStorage.setItem("userdetails", JSON.stringify(payload));
+    window.close()
    }
   return (
       <>
@@ -37,7 +61,7 @@ const SignIn = () => {
         }}
       >
         <h5> <AdminPanelSettingsIcon></AdminPanelSettingsIcon> Sign In</h5>
-        <Button style={{textTransform:"capitalize", fontWeight:"bolder", color:"rgba(88,88,88,255)", border:"1px solid rgba(88,88,88,255)", display:"flex", justifyContent:"space-between"}} onClick={handleSign} variant="outlined">
+        <Button style={{textTransform:"capitalize", fontWeight:"bolder", color:"rgba(88,88,88,255)", border:"1px solid rgba(88,88,88,255)", display:"flex", justifyContent:"space-between"}}  variant="outlined">
           {" "}
           <LocalMoviesIcon sx={{ margin: "0 1rem" }}></LocalMoviesIcon> <div>  Sign In
           With IMDb  </div>
@@ -56,7 +80,7 @@ const SignIn = () => {
           <FacebookIcon sx={{ margin: "0 1rem" }}></FacebookIcon>  <div> Sign In With Facebook  </div> 
           
         </Button>
-        <Button  style={{textTransform:"capitalize", fontWeight:"bolder", color:"rgba(88,88,88,255)", border:"1px solid rgba(88,88,88,255)",display:"flex", justifyContent:"space-between"}} variant="outlined">
+        <Button onClick={handlegoogle}  style={{textTransform:"capitalize", fontWeight:"bolder", color:"rgba(88,88,88,255)", border:"1px solid rgba(88,88,88,255)",display:"flex", justifyContent:"space-between"}} variant="outlined">
           {" "}
           <GoogleIcon sx={{ margin: "0 1rem" }}> </GoogleIcon> <div> Sign In With Google  </div> 
           

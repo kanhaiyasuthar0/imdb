@@ -5,6 +5,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import axios from "axios";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, islogin, is_Login } from '../Redux/Kanhaiya/action';
 import { AuthContext } from '../Context/AuthContext';
@@ -18,11 +20,11 @@ const SignInPage = () => {
   
   useEffect(()=>{
     let userlog = JSON.parse(localStorage.getItem("userdetails"));
-    console.log(userlog)
+    // console.log(userlog)
     if(userlog){
       setUser({...userlog});
       
-      getUser()
+      // getUser()
     }
     return;
   }, [])
@@ -62,9 +64,31 @@ const SignInPage = () => {
     // }
 
   }
-  const handleSubmit = async()=>{
-    localStorage.setItem("userdetails", JSON.stringify(user));
-       getUser()
+  const handleSubmit = ()=>{
+    let payload = {
+      email: user.username,
+      password: user.password
+    }
+    console.log(payload)
+    try {
+      axios.post("https://imdbbackend.herokuapp.com/signin", payload).then((data)=>{
+      // axios.post("http://localhost:9007/signin", payload).then((data)=>{
+        if(data.status ==200){
+          console.log(data);
+          localStorage.setItem("userdetails", JSON.stringify(payload));
+          navigate("/")
+        }else{
+          alert("please enter the correct credentials")
+        }
+      }
+      )
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+    
+      //  getUser()
   }
   return (
     <div
@@ -93,7 +117,7 @@ const SignInPage = () => {
             style={{ fontSize: "12px", fontWeight: "bold", marginTop:"12px" }}
             htmlFor="email"
           >
-            Username
+            Email
           </label>
           <input onChange={handleChange}  style={{ fontSize: "12px" }} type="email" name="username" />
 

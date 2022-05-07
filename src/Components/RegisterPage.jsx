@@ -3,59 +3,53 @@ import React, { useState } from "react";
 import Logo from "./Logo";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const RegisterPage = () => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const [userData , setUserData] = useState({
-    email:"",
-    password:"",
-    username:""
-  })
-  const registerData = async (payload)=>{
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+    username: "",
+  });
+  const registerData =  (payload) => {
     payload = {
-          name:userData.name,
-          email:userData.email,
-          password:userData.password,
-          username:userData.name,
-         
-          mobile: `${Math.floor(Math.random() * 11)}`,
-          description: "NA",
-    }
-    // console.log(payload);
-   try {
-     //ghar ka api
-     let res1 = await fetch("https://masai-api-mocker.herokuapp.com/auth/register" , {
-       method:"POST",
-       body:JSON.stringify(payload),
-       headers:{
-         "Content-Type" : "application/json"
-       }
-     })
-    let res2 = await res1.json();
-     console.log(res2);
-     navigate(`/signi`)
-   } catch (error) {
-     console.log(error);
-   }
-   
-  }
+      email:userData.email,
+      password:userData.password,
+      username:userData.name,
 
-  const handleChange = (e)=>{
-    const {name, value} = e.target;
-    if(name!=="name"){
+     
+    };
+    
+     try {
+    //    //ghar ka api
+    // axios.post("https://imdbbackend.herokuapp.com/register", payload).then((data)=>console.log(data))
+    axios.post("https://imdbbackend.herokuapp.com/register", payload).then((data)=>{if(data.status==200){
 
-      setUser({...user, [name] : value })
+       navigate(`/signi`)
+    }})
+
+      
+     } catch (error) {
+       console.log(error);
+     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name !== "name") {
+      setUser({ ...user, [name]: value });
     }
 
-    setUserData({...userData, [name]:value})
-  }
-  const sendData = ()=>{
-    // console.log(userData);
-    registerData(user)
-  }
+    setUserData({ ...userData, [name]: value });
+  };
+  const sendData = () => {
+    console.log(user);
+    registerData(user);
+  };
 
   return (
     <div
@@ -90,14 +84,24 @@ const RegisterPage = () => {
           >
             Your name
           </label>
-          <input onChange={handleChange} style={{ fontSize: "12px" }} type="text" name="name" />
+          <input
+            onChange={handleChange}
+            style={{ fontSize: "12px" }}
+            type="text"
+            name="name"
+          />
           <label
             style={{ fontSize: "12px", fontWeight: "bold", marginTop: "12px" }}
             htmlFor="email"
           >
             Email
           </label>
-          <input onChange={handleChange} style={{ fontSize: "12px" }} type="email" name="email" />
+          <input
+            onChange={handleChange}
+            style={{ fontSize: "12px" }}
+            type="email"
+            name="email"
+          />
 
           <label
             style={{ fontSize: "12px", fontWeight: "bold", marginTop: "12px" }}
@@ -105,8 +109,9 @@ const RegisterPage = () => {
           >
             Password
           </label>
-          <input onChange={handleChange} 
-          name="password"
+          <input
+            onChange={handleChange}
+            name="password"
             style={{ fontSize: "12px" }}
             type="password"
             placeholder="at least 8 characters"
@@ -137,7 +142,7 @@ const RegisterPage = () => {
             placeholder="********"
           />
           <button
-          onClick={sendData}
+            onClick={sendData}
             style={{
               fontSize: "12px",
               padding: "4px",
@@ -145,10 +150,10 @@ const RegisterPage = () => {
               borderRadius: "3px",
               margin: "6px 0px",
               fontWeight: "400",
-              background: 'rgb(240 193 75)',
-              borderColor: 'rgb(168 135 52) rgb(156 126 49) rgb(132 106 41)',
-              color:' rgb(17 17 17)',
-                }}
+              background: "rgb(240 193 75)",
+              borderColor: "rgb(168 135 52) rgb(156 126 49) rgb(132 106 41)",
+              color: " rgb(17 17 17)",
+            }}
           >
             Create your IMDb account
           </button>

@@ -13,7 +13,7 @@ export function AuthContextProvider({ children }) {
   const [progress, setProgress] = useState(0)
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [isChecked, setIsChecked] = useState(false)
-
+  const [isSuccess, setIsSuccess] = useState(false)
     const [popup, setPopup] = useState(false)
    
     
@@ -55,10 +55,16 @@ export function AuthContextProvider({ children }) {
       setPopup(false)
       naviagte("/watch")
     }
+    const navigateHome = ()=>{
+      setTimeout(() => {
+        naviagte("/")
+        
+      }, 2000);
+    }
     
 
   return (
-    <AuthContext.Provider value={{setVId,vId,setProgress,progress,setWatchTrailerData,WatchTrailerData, login, isAuth , token ,logout, handleColor, color, handleSearch, popup, setPopup,base_url, setisEnglish, isEnglish, setIsChecked,isChecked,rateFlag,setRateFlag}}>
+    <AuthContext.Provider value={{setVId,vId,setProgress,progress,setWatchTrailerData,WatchTrailerData, login, isAuth , token ,logout, handleColor, color, handleSearch, popup, setPopup,base_url, setisEnglish, isEnglish, setIsChecked,isChecked,rateFlag,setRateFlag, isSuccess, setIsSuccess, navigateHome}}>
       {children}
     </AuthContext.Provider>
   );
