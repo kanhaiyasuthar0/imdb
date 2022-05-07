@@ -132,7 +132,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
 
   const [open, setOpen] = React.useState(false);
 
-  const [value, setValue] = useState(0);
+  const [ratevalue, setRateValue] = useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -157,9 +157,6 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
     dispatch(handleAdd(item));
   };
 
-  function takeRateValue(){
-    console.log(value)
-  }
   // function rateBtnFun() {
   //   setRateFlag(!rateFlag);
   //   console.log("rate btn clicked", rateFlag);
@@ -192,35 +189,24 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
               <Button
                 variant="outlined"
                 onClick={handleClickOpen}
-                style={{ border: "none" }}
+                style={{ border: "none",width:"4px"}}
               >
                 <StarBorderOutlinedIcon
-                  style={{ color: "#5594e5", fontSize: "17px" }}
+                  style={{ color: "#5594e5", fontSize: "17px" , width:"100%"}}
                 />
+                <span style={{color:"white"}}ratevalue>{ratevalue=== 0 ? '' : ratevalue}</span>
               </Button>
               <Dialog
                 open={open}
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
-                style={{ border: "2px solid red"}}
               >
-                {/* <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          Subscribe
-        </DialogTitle> */}
+                
                 <DialogContent style={{background:"#1f1f1f", width:"600px", height:"400px", textAlign:"center"}}>
                   
                 <RatePopUp>
-                      {/* <button
-                        style={{
-                          backgroundColor: "transparent",
-                          fontSize: "5vh",
-                          color: "white",
-                          border: "0px",
-                        }}
-                      >
-                        X
-                      </button> */}
+                     
 
                       <StarIcon
                         style={{
@@ -238,8 +224,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
                       >
                         RATE THIS
                       </h6>
-                        {/* <Rating name="full-rating" defaultValue={0} precision={1} style={{color:"#5594e5",}}/> */}
-                        <Rating name="customized-10"     getLabelText={(value) => console.log(value,'rateValue')} defaultValue={2} max={10} style={{color:"#5594e5"}}/>
+                        <Rating name="customized-10"     getLabelText={(value) => setRateValue(value)} defaultValue={0} max={10} style={{color:"#5594e5"}}/>
                         <br />
                       <button
                         style={{
