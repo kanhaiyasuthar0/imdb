@@ -41,7 +41,10 @@ const SignIn = () => {
       password : "403"
     }
     localStorage.setItem("userdetails", JSON.stringify(payload));
-    window.close()
+    setTimeout(() => {
+      navigate("/")
+    }, 8000);
+    // window.close()
    }
   return (
       <>

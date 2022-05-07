@@ -33,7 +33,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Navbar = () => {
   const user = useSelector((state) => state.myReducer.user);
   const isLogin = useSelector((state) => state.myReducer.isLogin);
-
+  const [USER, setUSER] = useState({})
+  
   const [open, setOpen] = React.useState(false);
   const [text, setText] = useState("");
 
@@ -390,7 +391,7 @@ const Navbar = () => {
                   <li className="nav-item">
                     {/* <a className="nav-link active">Sign In</a>  */}
                     {isLogin ? (
-                      <UserDropdown username={user.username}></UserDropdown>
+                      <UserDropdown username={user.email}></UserDropdown>
                     ) : (
                       <a onClick={handlelog} className="nav-link active">
                         {isEnglish ? "  Sign In" : "साइन इन"}

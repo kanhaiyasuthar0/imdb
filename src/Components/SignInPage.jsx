@@ -76,6 +76,7 @@ const SignInPage = () => {
         if(data.status ==200){
           console.log(data);
           localStorage.setItem("userdetails", JSON.stringify(payload));
+          dispatch(addUser(user))
           navigate("/")
         }else{
           alert("please enter the correct credentials")
