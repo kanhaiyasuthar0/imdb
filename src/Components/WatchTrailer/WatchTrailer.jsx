@@ -38,7 +38,7 @@ function WatchTrailer() {
     if (!loggedInUser) {
       navigate("/signi");
     }
-    console.log([API_KEY]);
+    // console.log([API_KEY]);
     window.scrollTo(0, 0);
   }, [inc]);
 
