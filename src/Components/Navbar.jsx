@@ -33,8 +33,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Navbar = () => {
   const user = useSelector((state) => state.myReducer.user);
   const isLogin = useSelector((state) => state.myReducer.isLogin);
-  const [USER, setUSER] = useState({})
-  
+  const [USER, setUSER] = useState({});
+  const { loggedInUser } = useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
   const [text, setText] = useState("");
 
@@ -61,7 +61,22 @@ const Navbar = () => {
     let value = text;
 
     setText(e.target.value);
-    getData(value);
+
+    db(value);
+  };
+  var timers;
+  const db = (value) => {
+    console.log(value);
+    if (timers) {
+      clearTimeout(timers);
+    }
+    timers = setTimeout(
+      (value) => {
+        getData(value);
+      },
+      1500,
+      value
+    );
   };
 
   const getData = async (data) => {
@@ -390,8 +405,10 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item">
                     {/* <a className="nav-link active">Sign In</a>  */}
-                    {isLogin ? (
-                      <UserDropdown username={user.email}></UserDropdown>
+                    {loggedInUser ? (
+                      <UserDropdown
+                        username={loggedInUser?.email}
+                      ></UserDropdown>
                     ) : (
                       <a onClick={handlelog} className="nav-link active">
                         {isEnglish ? "  Sign In" : "साइन इन"}

@@ -4,6 +4,12 @@ import Logo from "./Logo";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { auth } from "../firebase/firebase-config";
+import { async } from "@firebase/util";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 const RegisterPage = () => {
   let navigate = useNavigate();
   const [user, setUser] = useState({
@@ -15,27 +21,34 @@ const RegisterPage = () => {
     password: "",
     username: "",
   });
-  const registerData =  (payload) => {
+
+  onAuthStateChanged(auth, (currentUSer) => {});
+  const registerData = async (payload) => {
     payload = {
-      email:userData.email,
-      password:userData.password,
-      username:userData.name,
-
-     
+      email: userData.email,
+      password: userData.password,
+      username: userData.name,
     };
-    
-     try {
-    //    //ghar ka api
-    // axios.post("https://imdbbackend.herokuapp.com/register", payload).then((data)=>console.log(data))
-    axios.post("https://imdbbackend.herokuapp.com/register", payload).then((data)=>{if(data.status==200){
 
-       navigate(`/signi`)
-    }})
-
-      
-     } catch (error) {
-       console.log(error);
-     }
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        payload.email,
+        payload.password
+      );
+      prompt("user is registered successfully");
+      navigate("/signi");
+      // axios.post("https://imdbbackend.herokuapp.com/register", payload).then((data)=>console.log(data))
+      // axios
+      //   .post("https://imdbbackend.herokuapp.com/register", payload)
+      //   .then((data) => {
+      //     if (data.status == 200) {
+      //       navigate(`/signi`);
+      //     }
+      //   });
+    } catch (error) {
+      console.log(error, "error");
+    }
   };
 
   const handleChange = (e) => {
