@@ -42,7 +42,7 @@ function WatchTrailer() {
     window.scrollTo(0, 0);
   }, [inc]);
 
-  // const API_KEY = API_KEY;
+  const API_KEY = API_KEY;
 
   const handleinc = () => {
     setInc((prev) => prev);
