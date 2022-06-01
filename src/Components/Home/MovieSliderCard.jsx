@@ -22,13 +22,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
 
-
-
-
-import Rating from '@mui/material/Rating';
-
-
-
+import Rating from "@mui/material/Rating";
 
 const Box = styled.div`
   width: 199px;
@@ -151,6 +145,7 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
     base_url,
     popup,
     setPopup,
+    loggedInUser,
   } = useContext(AuthContext);
 
   const handleAdd1 = (item) => {
@@ -189,12 +184,14 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
               <Button
                 variant="outlined"
                 onClick={handleClickOpen}
-                style={{ border: "none",width:"4px"}}
+                style={{ border: "none", width: "4px" }}
               >
                 <StarBorderOutlinedIcon
-                  style={{ color: "#5594e5", fontSize: "17px" , width:"100%"}}
+                  style={{ color: "#5594e5", fontSize: "17px", width: "100%" }}
                 />
-                <span style={{color:"white"}}ratevalue>{ratevalue=== 0 ? '' : ratevalue}</span>
+                <span style={{ color: "white" }} ratevalue>
+                  {ratevalue === 0 ? "" : ratevalue}
+                </span>
               </Button>
               <Dialog
                 open={open}
@@ -202,47 +199,56 @@ function MovieSliderCard({ name, poster, rate, dispatch, item }) {
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
               >
-                
-                <DialogContent style={{background:"#1f1f1f", width:"600px", height:"400px", textAlign:"center"}}>
-                  
-                <RatePopUp>
-                     
-
-                      <StarIcon
-                        style={{
-                          fontSize: "26vh",
-                          zIndex: "2",
-                          color: "#5594e5",
-                        }}
-                      />
-                      <h6
-                        style={{
-                          color: "yellow",
-                          marginTop: "2vh",
-                          textAlign: "center",
-                        }}
-                      >
-                        RATE THIS
-                      </h6>
-                        <Rating name="customized-10"     getLabelText={(value) => setRateValue(value)} defaultValue={0} max={10} style={{color:"#5594e5"}}/>
-                        <br />
-                      <button
-                        style={{
-                          marginTop: "1vh",
-                          marginLeft: "4vh",
-                          height: "40px",
-                          width: "300px",
-                          backgroundColor: "#575757",
-                          border: "0px",
-                          borderRadius: "1vh",
-                          color: "white",
-                        }}
-                        onClick={handleClose}
-                      >
-                        Rate
-                      </button>
-                    </RatePopUp>
-{/*                     
+                <DialogContent
+                  style={{
+                    background: "#1f1f1f",
+                    width: "600px",
+                    height: "400px",
+                    textAlign: "center",
+                  }}
+                >
+                  <RatePopUp>
+                    <StarIcon
+                      style={{
+                        fontSize: "26vh",
+                        zIndex: "2",
+                        color: "#5594e5",
+                      }}
+                    />
+                    <h6
+                      style={{
+                        color: "yellow",
+                        marginTop: "2vh",
+                        textAlign: "center",
+                      }}
+                    >
+                      RATE THIS
+                    </h6>
+                    <Rating
+                      name="customized-10"
+                      getLabelText={(value) => setRateValue(value)}
+                      defaultValue={0}
+                      max={10}
+                      style={{ color: "#5594e5" }}
+                    />
+                    <br />
+                    <button
+                      style={{
+                        marginTop: "1vh",
+                        marginLeft: "4vh",
+                        height: "40px",
+                        width: "300px",
+                        backgroundColor: "#575757",
+                        border: "0px",
+                        borderRadius: "1vh",
+                        color: "white",
+                      }}
+                      onClick={handleClose}
+                    >
+                      Rate
+                    </button>
+                  </RatePopUp>
+                  {/*                     
                   <DialogContentText>
                   </DialogContentText>
                   <DialogActions>

@@ -48,9 +48,10 @@ export function AuthContextProvider({ children }) {
   };
 
   let arr = [
-    "AIzaSyBPo8ftIoPViBJeLeAgOLS0sZXDq0l-IMA",
     "AIzaSyCdkSUDMRM0nqFxIZpIujLEWkrtX7W8H6c",
     "AIzaSyDV4mL7oAMtNA6aIF_WM_o_VYZzrv_xKyQ",
+    "cd1b752287267fcdd91d7693d2fb5336",
+    "AIzaSyBPo8ftIoPViBJeLeAgOLS0sZXDq0l-IMA",
   ];
   const getYT = async (title) => {
     setProgress(50);
