@@ -60,9 +60,10 @@ const RegisterPage = () => {
     setUserData({ ...userData, [name]: value });
   };
   const sendData = () => {
-    console.log(user);
+    // console.log(user);
     registerData(user);
   };
+  
 
   return (
     <div
