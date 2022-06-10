@@ -33,7 +33,9 @@ function WatchTrailer() {
     popup,
     setPopup,
     loggedInUser,
+    arr,
   } = useContext(AuthContext);
+  console.log(arr);
   useEffect(() => {
     if (!loggedInUser) {
       navigate("/signi");
@@ -42,7 +44,7 @@ function WatchTrailer() {
     window.scrollTo(0, 0);
   }, [inc]);
 
-  const API_KEY = API_KEY;
+  // const API_KEY = API_KEY;
 
   const handleinc = () => {
     setInc((prev) => prev);
@@ -98,7 +100,7 @@ function WatchTrailer() {
           Related Videos
         </h3>
         <RelatedVideoSlider
-          api_url={`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`}
+          api_url={`https://api.themoviedb.org/3/trending/all/week?api_key=${arr[0]}&language=en-US`}
           base_url={base_url}
         />
       </div>

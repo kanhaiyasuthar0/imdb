@@ -105,6 +105,7 @@ export function AuthContextProvider({ children }) {
         navigateHome,
         loggedInUser,
         logoutUser,
+        arr,
       }}
     >
       {children}
